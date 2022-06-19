@@ -1,83 +1,83 @@
-import "./sing-in-form.styles.scss";
-import { useState } from "react";
-import {
-  createUserDocumentFromAuth,
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from "../../utils/firebase/firebase.utils";
+import { useState } from 'react';
 
-import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import FormInput from '../form-input/form-input.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+
+import {
+  signInAuthUserWithEmailAndPassword,
+  signInWithGooglePopup,
+} from '../../utils/firebase/firebase.utils';
+
+import { SignInContainer, ButtonsContainer } from './sign-in-form.styles.jsx';
 
 const defaultFormFields = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const resetFields = () => {
+
+  const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
-  const SignInWithGoogle = async () => {
+  const signInWithGoogle = async () => {
     await signInWithGooglePopup();
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
     try {
       await signInAuthUserWithEmailAndPassword(email, password);
-      resetFields();
-    } catch (err) {
-      switch (err.code) {
-        case "auth/wrong-password":
-          alert("incorrect password");
-          break;
-        case "auth/user-not-found":
-          alert("User not found");
-          break;
-        default:
-          console.log(err);
-      }
+      resetFormFields();
+    } catch (error) {
+      console.log('user sign in failed', error);
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
     setFormFields({ ...formFields, [name]: value });
   };
 
   return (
-    <div className="sing-up-container">
+    <SignInContainer>
       <h2>Already have an account?</h2>
-      <span>Sign up with your email and password</span>
+      <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-          label="Email"
-          type="email"
+          label='Email'
+          type='email'
           required
-          name="email"
+          onChange={handleChange}
+          name='email'
           value={email}
-          onChange={handleChange}
         />
+
         <FormInput
-          label="Password"
-          type="password"
+          label='Password'
+          type='password'
           required
-          name="password"
-          value={password}
           onChange={handleChange}
+          name='password'
+          value={password}
         />
-        <div className="buttons-contaier">
-          <Button type="submit">Sign In</Button>
-          <Button type='button' buttonType="google" onClick={SignInWithGoogle}>
-            Google Sign In
+        <ButtonsContainer>
+          <Button type='submit'>Sign In</Button>
+          <Button
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            type='button'
+            onClick={signInWithGoogle}
+          >
+            Sign In With Google
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
