@@ -3,8 +3,9 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/cart.context';
 import Button from '../button/button.component'
 
-const ProductCard = (product) => {
+const ProductCard = ({product}) => {
     const { name, price, imageUrl } = product;
+    console.log('Product', product);
     const { cartItems, addItemToCart } = useContext(CartContext);
     const addProductToCart = () => addItemToCart(product);
 
