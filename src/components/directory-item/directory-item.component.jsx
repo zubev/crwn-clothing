@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const DirectoryItem = ({ title, imageUrl, route }) => {
   const navigate = useNavigate();
-  console.log(route);
   const onNavigateHandler = () => navigate(route)
 
   return (
