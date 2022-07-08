@@ -68,7 +68,7 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionRef);
 
   const queryShapShot = await getDocs(q);
-  return queryShapShot.docs.map(docSnapshot => docSnapshot.data());
+  return queryShapShot.docs.map((docSnapshot) => docSnapshot.data());
 };
 
 export const createUserDocumentFromAuth = async (
