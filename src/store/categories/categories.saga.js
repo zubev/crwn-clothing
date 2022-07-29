@@ -5,7 +5,7 @@ import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
 import {
   fetchCategoriesSuccess,
   fetchCategoriesFailed,
-} from './categories.action';
+} from './categories.action.ts';
 
 import { CATEGORIES_ACTION_TYPES } from './categories.types';
 

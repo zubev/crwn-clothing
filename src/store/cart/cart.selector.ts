@@ -1,6 +1,8 @@
 import { createSelector } from "reselect";
+import { CartState } from "./cart.reducer";
+import { RootState } from "../store";
 
-const selectCart = (state) => state.cart;
+const selectCart = (state: RootState): CartState => state.cart;
 
 export const selectCartItems = createSelector(
   [selectCart],
