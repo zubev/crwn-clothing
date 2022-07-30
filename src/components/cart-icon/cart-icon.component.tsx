@@ -1,9 +1,9 @@
-import { ShoppingIcon, CartIconContainer, ItemCount } from './cart-icon.styles.jsx';
+import { ShoppingIcon, CartIconContainer, ItemCount } from './cart-icon.styles';
 import { useSelector } from 'react-redux';
-import { selectIsCartOpen } from '../../store/cart/cart.selector.ts';
+import { selectIsCartOpen } from '../../store/cart/cart.selector';
 import { useDispatch } from 'react-redux';
-import { setIsCartOpen } from '../../store/cart/cart.action.ts';
-import { selectCartCount } from '../../store/cart/cart.selector.ts';
+import { setIsCartOpen } from '../../store/cart/cart.action';
+import { selectCartCount } from '../../store/cart/cart.selector';
 
 
 const CartIcon = () => {
